@@ -8,6 +8,7 @@ class DashboardPreferences(models.Model):
     This model represents the dashboard preferences for a user.
     """
     user = models.ForeignKey('auth.User')
+    pathname = models.TextField(blank=True)
     data = models.TextField()
 
     def __unicode__(self):

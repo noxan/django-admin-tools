@@ -17,13 +17,19 @@ def set_preferences(request):
     """
     This view serves and validates a preferences form.
     """
+    if request.method == "POST":
+        host = "http://%s" % request.META['HTTP_HOST']
+        pathname = request.META['HTTP_REFERER'][len(host):]
     try:
-        preferences = DashboardPreferences.objects.get(user=request.user)
+        preferences = DashboardPreferences.objects.get(user=request.user, pathname=pathname)
     except DashboardPreferences.DoesNotExist:
         preferences = None
     if request.method == "POST":
+        #host = "http://%s" % request.META['HTTP_HOST']
+        #pathname = request.META['HTTP_REFERER'][len(host):]
         form = DashboardPreferencesForm(
             user=request.user,
+            pathname=pathname,
             data=request.POST,
             instance=preferences
         )
