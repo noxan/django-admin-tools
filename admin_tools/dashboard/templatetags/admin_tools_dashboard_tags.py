@@ -40,7 +40,8 @@ def admin_tools_render_dashboard(context, location='index', dashboard=None):
     dashboard.init_with_context(context)
 
     try:
-        preferences = DashboardPreferences.objects.get(user=context['request'].user).data
+        preferences = DashboardPreferences.objects.get(user=context['request'].user, \
+                pathname=context['request'].META["PATH_INFO"]).data
     except DashboardPreferences.DoesNotExist:
         preferences = '{}'
         DashboardPreferences(user=context['request'].user, data=preferences).save()
