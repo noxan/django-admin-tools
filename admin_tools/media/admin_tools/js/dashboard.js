@@ -5,7 +5,7 @@ var init_dashboard = function(id, columns, preferences, url) {
             return preferences;
         },
         'save_preferences_function': function(options, preferences) {
-            jQuery.post(url, { data: JSON.stringify(preferences) });
+            jQuery.post(url, { dashboard_id: options.dashboard_id, data: JSON.stringify(preferences) });
         }
     });
     $(".group-tabs").tabs();

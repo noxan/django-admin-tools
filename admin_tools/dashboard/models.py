@@ -8,15 +8,15 @@ class DashboardPreferences(models.Model):
     This model represents the dashboard preferences for a user.
     """
     user = models.ForeignKey('auth.User')
-    pathname = models.TextField(blank=True)
+    dashboard_id = models.TextField()
     data = models.TextField()
 
     def __unicode__(self):
-        return "%s dashboard preferences" % self.user.username
+        return "%s dashboard preferences for %s" % (self.user.username, self.dashboard_id)
 
     class Meta:
         db_table = 'admin_tools_dashboard_preferences'
-        ordering = ('user',)
+        ordering = ('user', 'dashboard_id')
 
 
 # warnings for deprecated imports
