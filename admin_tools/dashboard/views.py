@@ -20,13 +20,13 @@ def set_preferences(request):
     """
     try:
         preferences = DashboardPreferences.objects.get(user=request.user, \
-                pathname=request.POST['pathname'])
+                dashboard_id=request.POST['dashboard_id'])
     except (DashboardPreferences.DoesNotExist, MultiValueDictKeyError):
         preferences = None
     if request.method == "POST":
         form = DashboardPreferencesForm(
             user=request.user,
-            pathname=request.POST['pathname'],
+            dashboard_id=request.POST['dashboard_id'],
             data=request.POST,
             instance=preferences
         )
@@ -38,7 +38,7 @@ def set_preferences(request):
         elif request.is_ajax():
             return HttpResponse('false')
     else:
-        form = DashboardPreferencesForm(user=request.user, pathname="", instance=preferences)
+        form = DashboardPreferencesForm(user=request.user, dashboard_id="", instance=preferences)
     return direct_to_template(request, 'admin_tools/dashboard/preferences_form.html', {
         'form': form,   
     })
