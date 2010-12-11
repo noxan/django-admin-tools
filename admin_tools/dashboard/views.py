@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic.simple import direct_to_template
+from django.utils.datastructures import MultiValueDictKeyError
 
 try:
     from django.views.decorators.csrf import csrf_exempt
@@ -17,19 +18,15 @@ def set_preferences(request):
     """
     This view serves and validates a preferences form.
     """
-    if request.method == "POST":
-        host = "http://%s" % request.META['HTTP_HOST']
-        pathname = request.META['HTTP_REFERER'][len(host):]
     try:
-        preferences = DashboardPreferences.objects.get(user=request.user, pathname=pathname)
-    except DashboardPreferences.DoesNotExist:
+        preferences = DashboardPreferences.objects.get(user=request.user, \
+                pathname=request.POST['pathname'])
+    except (DashboardPreferences.DoesNotExist, MultiValueDictKeyError):
         preferences = None
     if request.method == "POST":
-        #host = "http://%s" % request.META['HTTP_HOST']
-        #pathname = request.META['HTTP_REFERER'][len(host):]
         form = DashboardPreferencesForm(
             user=request.user,
-            pathname=pathname,
+            pathname=request.POST['pathname'],
             data=request.POST,
             instance=preferences
         )
@@ -41,7 +38,7 @@ def set_preferences(request):
         elif request.is_ajax():
             return HttpResponse('false')
     else:
-        form = DashboardPreferencesForm(user=request.user, instance=preferences)
+        form = DashboardPreferencesForm(user=request.user, pathname="", instance=preferences)
     return direct_to_template(request, 'admin_tools/dashboard/preferences_form.html', {
         'form': form,   
     })

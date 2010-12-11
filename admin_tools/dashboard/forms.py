@@ -21,10 +21,10 @@ class DashboardPreferencesForm(forms.ModelForm):
             **kwargs
         )
         preferences.user = self.user
-        preferences.pathname= self.pathname
+        preferences.pathname = self.pathname
         preferences.save()
         return preferences
 
     class Meta:
-        fields = ('data',)
+        fields = ('pathname', 'data',)
         model = DashboardPreferences
