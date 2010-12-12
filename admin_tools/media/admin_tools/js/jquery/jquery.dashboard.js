@@ -117,7 +117,7 @@
         var percent = Math.floor(100 / options.columns);
         var start = 0;
         var stop = 0;
-        for (i = 0; i < options.columns; i++) {
+        for (var i = 0; i < options.columns; i++) {
             if (typeof(sizes[i]) == 'undefined') {
                 start = i * size;
                 stop  = start + size;
@@ -127,7 +127,7 @@
                 );
                 continue;
             } else {
-                start = (i == 0) ? 0 : sizes[i-1];
+                start = (i == 0) ? 0 : start + sizes[i-1];
                 stop  = start + sizes[i];
             }
             elts.slice(start, stop).wrapAll(
