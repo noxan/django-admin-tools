@@ -9,13 +9,12 @@ administration interface, it includes:
  * a customizable menu bar,
  * tools to make admin theming easier.
 
-The project code and bugtracker is hosted on 
-`Bitbucket <http://bitbucket.org/izi/django-admin-tools/>`_. 
+The project code and bugtracker is hosted on `Bitbucket`
+http://bitbucket.org/izi/django-admin-tools/
 
-Django-admin-tools is generously documented, you can 
-`browse the documentation online 
-<http://packages.python.org/django-admin-tools/>`_.
-a good start is to read `the quickstart guide 
-<http://packages.python.org/django-admin-tools/quickstart.html>`_.
+Django-admin-tools is generously documented, you can `browse the documentation online`
+http://packages.python.org/django-admin-tools/
+a good start is to read `the quickstart guide`
+http://packages.python.org/django-admin-tools/quickstart.html
 
 Thanks for downloading django-admin-tools.
