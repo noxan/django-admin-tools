@@ -1,4 +1,3 @@
-syntax: glob
 *.egg-info
 *.pyc
 *.*~
@@ -15,7 +14,6 @@ _static
 .settings
 .DS_Store
 .svn
-
-syntax: regexp
-^test_proj/_coverage/(?!noremove)
-^test_proj/testdb.sqlite$
+/test_proj/_coverage/*
+!/test_proj/_coverage/noremove
+/test_proj/testdb.sqlite
